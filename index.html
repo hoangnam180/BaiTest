@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Mở devtool Console để xem kết quả</h2>
+    <script>
+      function randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      const test = {
+        start: (time) => {
+          test.mattroi(time);
+          test.chim(time);
+          test.hoano(time);
+        },
+        mattroimoc: false,
+        soluongchimthuc: [],
+        sohoano: [],
+        color: ["đỏ", "lục", "lam"],
+        mattroi(time) {
+          if (time >= 6 && time < 18) {
+            console.log(`6h mặt trời mọc`);
+            this.mattroimoc = true;
+          }
+          if (time >= 18) {
+            console.log(`${time}h mặt trời lặn`);
+            this.mattroimoc = false;
+          }
+        },
+
+        chim(time) {
+          if (this.mattroimoc || time === 5) {
+            let soluongchimthuc = randomIntFromInterval(1, 20);
+            console.log(`chim thưc dậy ${soluongchimthuc} con lúc ${6 - 1}h`);
+            for (let i = 1; i < soluongchimthuc; i++) {
+              this.soluongchimthuc.push(`chim ${i}`);
+            }
+          }
+          if (this.mattroimoc === false) {
+            console.log(`chim di ngủ lúc ${18 + 1}h`);
+          }
+        },
+        hoano(time) {
+          if (this.mattroimoc) {
+            let sohoano = randomIntFromInterval(1, 20);
+            console.log(
+              `hoa nở được ${sohoano} bông vào lúc ${
+                time + randomIntFromInterval(1, 12)
+              }h`
+            );
+            for (let i = 1; i < sohoano; i++) {
+              this.sohoano.push({
+                color: this.color[randomIntFromInterval(0, 2)],
+                name: `bông số ${i}`,
+                bihutmat:
+                  this.soluongchimthuc[
+                    randomIntFromInterval(0, this.soluongchimthuc.length - 1)
+                  ],
+              });
+            }
+            console.log(this.sohoano);
+          }
+          if (this.mattroimoc === false) {
+            console.log(`hoa tàn`);
+          }
+        },
+      };
+      for (let index = 1; index < 23; index++) {
+        console.log("------------------------------------");
+        console.log("lúc" + index + "giờ");
+        test.start(index);
+        console.log("------------------------------------");
+      }
+    </script>
+  </body>
+</html>
